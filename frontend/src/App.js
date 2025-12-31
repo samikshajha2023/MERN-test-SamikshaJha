@@ -86,6 +86,10 @@ function App() {
         <button type="submit">Add</button>
       </form>
 
+      {todos.length === 0 && (
+        <p className="empty-msg">🎉 Your list is empty! Add something fun! 🎉</p>
+      )}
+
       <ul className="todo-list">
         {todos.map((todo) => (
           <li key={todo._id} className="todo-item">
