@@ -12,11 +12,13 @@ body {
 
 .app {
   max-width: 650px;
+  width: 100%;
   margin: 40px auto;
   background: #f9f9ff;
   padding: 30px;
   border-radius: 18px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .heading {
@@ -62,22 +64,24 @@ body {
   gap: 15px;
 }
 
-/* ✅ FIXED CARD */
 .todo-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   padding: 16px;
   background: white;
   border-radius: 14px;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-  overflow: hidden; /* 🔥 prevents overflow */
+  flex-wrap: wrap;      /* ✅ allows wrapping */
 }
 
 .todo-text {
-  flex: 1;
-  min-width: 0; /* 🔥 CRITICAL FIX */
+  flex: 1 1 auto;       /* ✅ grow/shrink allowed */
+  min-width: 0;         /* ✅ critical for text wrapping */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .todo-text strong {
@@ -91,15 +95,14 @@ body {
   display: block;
   font-size: 14px;
   color: #666;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .todo-actions {
   display: flex;
   gap: 8px;
-  flex-shrink: 0;
+  flex-shrink: 0;       /* buttons stay fixed size */
+  margin-top: 6px;      /* small gap if wrapped */
 }
 
 .todo-actions button {
