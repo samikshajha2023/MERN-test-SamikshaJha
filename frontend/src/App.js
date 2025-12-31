@@ -35,8 +35,8 @@ function App() {
 
     try {
       const res = await axios.post("http://localhost:5000/api/todos", {
-        title,
-        description,
+        title: tempTodo.title,
+        description: tempTodo.description,
       });
 
       setTodos((prev) =>
@@ -51,7 +51,7 @@ function App() {
     setTodos(todos.filter((todo) => todo._id !== id));
     try {
       await axios.delete(`http://localhost:5000/api/todos/${id}`);
-    } catch {
+    } catch (err) {
       fetchTodos();
     }
   };
@@ -60,65 +60,51 @@ function App() {
     setTodos(todos.filter((todo) => todo._id !== id));
     try {
       await axios.put(`http://localhost:5000/api/todos/${id}`, { done: true });
-    } catch {
+    } catch (err) {
       fetchTodos();
     }
   };
 
   return (
-    <div className="app-container">
-      <div className="todo-card">
-        <h1 className="title">
-          🌈 My <span>To-Do</span> List ✨
-        </h1>
+    <div className="app">
+      <h1 className="heading">✨ My To-Do List ✨</h1>
 
-        <form onSubmit={addTodo} className="todo-form">
-          <input
-            type="text"
-            placeholder="✍️ What do you need to do?"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="📝 Add some details..."
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <button type="submit">➕ Add</button>
-        </form>
+      <form className="todo-form" onSubmit={addTodo}>
+        <input
+          type="text"
+          placeholder="Todo title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Todo description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <button type="submit">Add</button>
+      </form>
 
-        <ul className="todo-list">
-          {todos.map((todo) => (
-            <li key={todo._id} className="todo-item">
-              <div>
-                <strong>{todo.title}</strong>
-                <p>{todo.description}</p>
-              </div>
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li key={todo._id} className="todo-item">
+            <div className="todo-text">
+              <strong>{todo.title}</strong>
+              <span>{todo.description}</span>
+            </div>
 
-              <div className="actions">
-                <button
-                  className="done-btn"
-                  onClick={() => markDone(todo._id)}
-                >
-                  ✔
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteTodo(todo._id)}
-                >
-                  ✖
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        {todos.length === 0 && (
-          <p className="empty-text">✨ Your list is empty. Add something fun!</p>
-        )}
-      </div>
+            <div className="todo-actions">
+              <button className="done" onClick={() => markDone(todo._id)}>
+                Done
+              </button>
+              <button className="delete" onClick={() => deleteTodo(todo._id)}>
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -1,53 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
 * {
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-}
-
-
-.app-container {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    #ff9a9e,
-    #fad0c4,
-    #fbc2eb,
-    #a1c4fd,
-    #c2e9fb
-  );
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/*  Main Card */
-.todo-card {
-  background: rgba(255, 255, 255, 0.95);
-  width: 100%;
-  max-width: 580px;
+.app {
+  max-width: 650px;
+  margin: 40px auto;
+  background: #f9f9ff;
   padding: 30px;
-  border-radius: 22px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/*  Heading */
-.title {
+.heading {
   text-align: center;
-  font-size: 2.6rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #ff6a00, #ee0979, #8e2de2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #4a4a8a;
 }
 
-/*  Form */
 .todo-form {
   display: flex;
   gap: 10px;
@@ -56,95 +35,96 @@ body {
 
 .todo-form input {
   flex: 1;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: none;
-  background: #f1f3ff;
-  outline: none;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
   font-size: 14px;
 }
 
-.todo-form input:focus {
-  box-shadow: 0 0 0 2px #a18cd1;
-}
-
 .todo-form button {
-  padding: 12px 18px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: #667eea;
   color: white;
-  cursor: pointer;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
   font-weight: 600;
-  transition: transform 0.2s;
+  cursor: pointer;
 }
 
 .todo-form button:hover {
-  transform: scale(1.05);
+  background: #5a67d8;
 }
 
-/* Todo List */
 .todo-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* ✅ FIXED CARD */
 .todo-item {
-  background: linear-gradient(135deg, #fdfbfb, #ebedee);
-  padding: 16px 18px;
-  border-radius: 16px;
-  margin-bottom: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden; /* 🔥 prevents overflow */
 }
 
-.todo-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+.todo-text {
+  flex: 1;
+  min-width: 0; /* 🔥 CRITICAL FIX */
 }
 
-.todo-item strong {
-  font-size: 15px;
+.todo-text strong {
+  display: block;
+  font-size: 16px;
   color: #333;
+  margin-bottom: 4px;
 }
 
-.todo-item p {
-  margin: 5px 0 0;
-  font-size: 13px;
-  color: #555;
+.todo-text span {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
-/* Action Buttons */
-.actions {
+.todo-actions {
   display: flex;
   gap: 8px;
+  flex-shrink: 0;
 }
 
-.done-btn {
-  background: linear-gradient(135deg, #56ab2f, #a8e063);
-  color: white;
+.todo-actions button {
   border: none;
-  padding: 8px 10px;
-  border-radius: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.delete-btn {
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+.done {
+  background: #48bb78;
   color: white;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 10px;
-  cursor: pointer;
 }
 
-/* Empty State */
-.empty-text {
-  text-align: center;
-  margin-top: 25px;
-  color: #666;
-  font-weight: 500;
+.delete {
+  background: #f56565;
+  color: white;
+}
+
+.done:hover {
+  background: #38a169;
+}
+
+.delete:hover {
+  background: #e53e3e;
 }
